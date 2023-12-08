@@ -52,11 +52,6 @@ public class PlayerControl : MonoBehaviour
             isJumping = true;
             jumpCount--;
         }
-        else if (isGrounded())
-        {
-            isJumping = false;
-            jumpCount = 1;
-        }
     }
 
     private void Crouch()
@@ -69,7 +64,7 @@ public class PlayerControl : MonoBehaviour
             //playerCollider.size = new Vector2(playerCollider.size.x, playerCollider.size.y / 2f);
             Vector3 newPosition = originalPosition - new Vector3(0f, playerCollider.size.y * 0.25f, 0f);
             transform.position = newPosition;
-            rb.velocity = new Vector2(rb.velocity.x, -jumpDistance);
+            rb.velocity = new Vector2(rb.velocity.x, -2*jumpDistance);
         }
     }
 
@@ -94,6 +89,11 @@ public class PlayerControl : MonoBehaviour
         else if (isCrouching)
         {
             StopCrouch();
+        }
+        else if (isGrounded())
+        {
+            isJumping = false;
+            jumpCount = 1;
         }
     }
 }
