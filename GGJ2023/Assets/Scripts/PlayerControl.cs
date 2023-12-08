@@ -69,25 +69,31 @@ public class PlayerControl : MonoBehaviour
             //playerCollider.size = new Vector2(playerCollider.size.x, playerCollider.size.y / 2f);
             Vector3 newPosition = originalPosition - new Vector3(0f, playerCollider.size.y * 0.25f, 0f);
             transform.position = newPosition;
+            rb.velocity = new Vector2(rb.velocity.x, -jumpDistance);
         }
-        else
-        {
-            isCrouching = false;
-            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2f, transform.localScale.z);
-            //playerCollider.size = new Vector2(playerCollider.size.x, playerCollider.size.y * 2f);
+    }
 
-        }
+    private void StopCrouch()
+    {
+        isCrouching = false;
+        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2f, transform.localScale.z);
+        //playerCollider.size = new Vector2(playerCollider.size.x, playerCollider.size.y * 2f);
+        rb.gravityScale = 1;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             Jump();
         }
-        else if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        else if (Input.GetKey(KeyCode.DownArrow))
         {
             Crouch();
+        }
+        else if (isCrouching)
+        {
+            StopCrouch();
         }
     }
 }
