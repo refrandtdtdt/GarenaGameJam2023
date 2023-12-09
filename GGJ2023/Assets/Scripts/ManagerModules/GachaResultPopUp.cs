@@ -16,17 +16,19 @@ public class GachaResultPopUp : MonoBehaviour
     void ShowGachaResultPopUp()
     {
         // Wait for 3 seconds before showing the pop-up
-        StartCoroutine(ShowPopUpAfterDelay(3f));
+        StartCoroutine(ShowPopUpAfterDelay(1f));
     }
 
     IEnumerator ShowPopUpAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
 
+        Canvas canvas = FindObjectOfType<Canvas>();
         // Instantiate the pop-up prefab
-        GameObject popUp = Instantiate(popUpPrefab, transform.position, Quaternion.identity);
+        GameObject popUp = Instantiate(popUpPrefab, canvas.transform);
 
         // Set the pop-up as a child of the canvas
-        popUp.transform.SetParent(transform, false);
+        popUp.transform.localPosition = Vector3.zero;
+        popUp.transform.localRotation = Quaternion.identity;
     }
 }
