@@ -1,18 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class FlowManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    ScoreKeeper scoreKeeper;
+    Currency currency;
+    [SerializeField] GameObject newHighscoreText, gameOverPopup;
+
+    private void Awake()
     {
-        
+        scoreKeeper = GetComponent<ScoreKeeper>();
+        currency = GetComponent<Currency>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void saveRun()
     {
-        
+        // save new highscores
+        if (scoreKeeper.newHighscore())
+        {
+            newHighscoreText.SetActive(true);
+            PlayerPrefs.SetInt("Highscore", scoreKeeper.getScore());
+        }
+
+        // calculate coin pickup
+        currency.increaseCoins(scoreKeeper.getScore() / 10);
+        currency.saveCoins();
+    }
+
+    public void retryRun()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void gameOver()
+    {
+        saveRun();
+        StartCoroutine(WaitPopup());
+    }
+    IEnumerator WaitPopup()
+    {
+        yield return new WaitForSeconds(3);
+        gameOverPopup.SetActive(true);
     }
 }
