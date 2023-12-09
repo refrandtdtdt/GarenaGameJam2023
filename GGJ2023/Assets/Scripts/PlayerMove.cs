@@ -10,6 +10,8 @@ public class PlayerMove : MonoBehaviour
     private float fixedTimer;
     private Rigidbody2D rb;
 
+    public int Speed { get => speed; }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();

@@ -14,14 +14,14 @@ public class PlayerControl : MonoBehaviour
     [SerializeField ]private int defaultGravityScale = 2;
     [SerializeField] private int jumpDistance = 20;
     [SerializeField] private LayerMask layerMask;
-    PowerUp powerUp = new DoubleJump();
+    public PowerUp powerUp = new DoubleJump();
 
     private float timer = 0f;
     private float logInterval = 1f; // Log interval in seconds
 
     void Start()
     {
-        powerUp = new DoubleJump();
+        powerUp = new CoinMagnet();
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<BoxCollider2D>();
     }
@@ -95,7 +95,7 @@ public class PlayerControl : MonoBehaviour
 
         if (timer >= logInterval)
         {
-            Debug.Log("maxJumpCount: " + maxJumpCount);
+            //Debug.Log("maxJumpCount: " + maxJumpCount);
             timer = 0f; // Reset the timer
         }
 
@@ -119,6 +119,19 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.U))
         {
             powerUp.ApplyEffect(this);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (powerUp is CoinMagnet)
+        {
+            if (((CoinMagnet)powerUp).IsActivated)
+            {
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawWireSphere(transform.position, ((CoinMagnet)powerUp).magnetRadius);
+            }
+            
         }
     }
 }
