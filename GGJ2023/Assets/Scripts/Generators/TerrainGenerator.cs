@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class TerrainGenerator : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class TerrainGenerator : MonoBehaviour
     public int gridX = 16;
     public int gridY = 16;
     public float playerDetectionDistance = 4f;
+    public int[] initialTerrains = { 0, 0, 0, 0, 1, 0, 3, 2 };
 
     public Transform player; // Reference to the player's transform
 
@@ -40,7 +42,14 @@ public class TerrainGenerator : MonoBehaviour
     {
         for (int x = 0; x < 8; x++)
         {
-            GenerateTerrainAtPosition(x * gridX);
+            int index = initialTerrains[x];
+            GameObject terrainPrefab = terrainPrefabs[index];
+
+            Vector3 spawnPosition = new Vector3(x*gridX, 0, 0);
+            GameObject instantiatedTerrain = Instantiate(terrainPrefab, spawnPosition, Quaternion.identity);
+
+            instantiatedTerrain.transform.parent = transform;
+            generatedTerrain.Add(instantiatedTerrain);
         }
 
         lastGeneratedX = (8 - 1) * gridX;

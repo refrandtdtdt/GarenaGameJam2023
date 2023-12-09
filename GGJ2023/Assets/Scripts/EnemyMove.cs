@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+public class EnemyMove : MonoBehaviour
 {
     [SerializeField] private int speed = 12;
     [SerializeField] private int speedIncrement = 1;
     [SerializeField] private float timer = 5f;
     private float fixedTimer;
     private Rigidbody2D rb;
+    public GameObject playerObject;
 
     void Start()
     {

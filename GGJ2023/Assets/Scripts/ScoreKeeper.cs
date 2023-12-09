@@ -9,7 +9,7 @@ public class ScoreKeeper : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private TextMeshProUGUI scoreText;
     private int highScore = 0;
-    private int currScore = 0;
+    public int currScore = 0;
     private float initialPos, currentPos;
 
     void Awake()

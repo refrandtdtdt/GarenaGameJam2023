@@ -10,7 +10,8 @@ public class PlayerControl : MonoBehaviour
     public int jumpCount = 1;
     private bool isJumping = false;
     private bool isCrouching = false;
-    [SerializeField] private int jumpDistance = 10;
+    [SerializeField ]private int defaultGravityScale = 2;
+    [SerializeField] private int jumpDistance = 20;
     [SerializeField] private LayerMask layerMask;
 
     void Start()
@@ -73,7 +74,7 @@ public class PlayerControl : MonoBehaviour
         isCrouching = false;
         transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2f, transform.localScale.z);
         //playerCollider.size = new Vector2(playerCollider.size.x, playerCollider.size.y * 2f);
-        rb.gravityScale = 1;
+        rb.gravityScale = defaultGravityScale;
     }
 
     void Update()
