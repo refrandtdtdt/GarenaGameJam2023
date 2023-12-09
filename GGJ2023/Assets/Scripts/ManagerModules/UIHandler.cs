@@ -7,6 +7,7 @@ using TMPro;
 public class UIHandler : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreText, coinText, highscoreText;
+    [SerializeField] private TextMeshProUGUI popupscoreText, popupcoinText, popuphighscoreText;
     private ScoreKeeper scoreKeeper;
     private Currency currency;
 
@@ -22,5 +23,8 @@ public class UIHandler : MonoBehaviour
         scoreText.text = "Score " + scoreKeeper.getScore();
         coinText.text = "" + currency.getCoins();
         highscoreText.text = "Highscore " + PlayerPrefs.GetInt("Highscore");
+        popupscoreText.text = "" + scoreKeeper.getScore();
+        popupcoinText.text = "" + currency.getCoins();
+        popuphighscoreText.text = "" + PlayerPrefs.GetInt("Highscore");
     }
 }

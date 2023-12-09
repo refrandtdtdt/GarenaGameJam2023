@@ -5,6 +5,9 @@ using UnityEngine;
 public class Currency : MonoBehaviour
 {
     private int coins = 0;
+    private int multiplier = 1;
+
+    public int Multiplier { get => multiplier; set => multiplier = value; }
 
     private void Start()
     {
@@ -21,7 +24,7 @@ public class Currency : MonoBehaviour
 
     public void increaseCoins(int amount)
     {
-        coins += amount;
+        coins += amount * multiplier;
     }
 
     public bool isEnough(int cost)

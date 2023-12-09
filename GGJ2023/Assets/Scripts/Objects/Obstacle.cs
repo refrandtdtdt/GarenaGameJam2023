@@ -14,7 +14,6 @@ public class Obstacle : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            Time.timeScale = 0;
             Debug.Log("ded");
             manager.gameOver();
             //SceneManager.LoadScene("Game Over");          nanti diganti pake nampilin popup beserta skor

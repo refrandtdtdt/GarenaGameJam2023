@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float timer = 5f;
     private float fixedTimer;
     private Rigidbody2D rb;
+    private bool dead;
 
     public int Speed { get => speed; }
 
@@ -20,6 +21,7 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (dead) { return; }
         // move every frame
         transform.position += new Vector3(speed * 0.01f, 0, 0);
 
@@ -30,5 +32,10 @@ public class PlayerMove : MonoBehaviour
             speed += speedIncrement;
             timer = fixedTimer;
         }
+    }
+
+    public void StopPlayer()
+    {
+        dead = true;
     }
 }

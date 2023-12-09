@@ -8,12 +8,14 @@ public class FlowManager : MonoBehaviour
 {
     ScoreKeeper scoreKeeper;
     Currency currency;
-    [SerializeField] GameObject newHighscoreText, gameOverPopup;
+    [SerializeField] GameObject newHighscoreText, gameOverPopup, gameUI;
+    [SerializeField] PlayerMove player;
 
     private void Awake()
     {
         scoreKeeper = GetComponent<ScoreKeeper>();
         currency = GetComponent<Currency>();
+        gameOverPopup.SetActive(false);
     }
 
     private void saveRun()
@@ -35,14 +37,21 @@ public class FlowManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void gotoMenu()
+    {
+        SceneManager.LoadScene("MenuScene");
+    }
+
     public void gameOver()
     {
+        player.StopPlayer();
+        gameUI.SetActive(false);
         saveRun();
         StartCoroutine(WaitPopup());
     }
     IEnumerator WaitPopup()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         gameOverPopup.SetActive(true);
     }
 }

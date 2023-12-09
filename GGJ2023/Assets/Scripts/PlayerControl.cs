@@ -56,8 +56,12 @@ public class PlayerControl : MonoBehaviour
         if (jumpCount <= 0 || isJumping) return;
         rb.velocity = new Vector2(rb.velocity.x, jumpDistance);
         jumpCount--;
-
-
+        if ((!isJumping && isGrounded()))
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpDistance);
+            isJumping = true;
+            jumpCount--;
+        }
     }
 
     private void Crouch()
@@ -79,6 +83,7 @@ public class PlayerControl : MonoBehaviour
         isCrouching = false;
         transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2f, transform.localScale.z);
         //playerCollider.size = new Vector2(playerCollider.size.x, playerCollider.size.y * 2f);
+        transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
         rb.gravityScale = defaultGravityScale;
     }
 
@@ -140,5 +145,4 @@ public class PlayerControl : MonoBehaviour
             
         }
     }
-
 }
