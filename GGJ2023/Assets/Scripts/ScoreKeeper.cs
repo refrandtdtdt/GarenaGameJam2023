@@ -7,7 +7,6 @@ using TMPro;
 public class ScoreKeeper : MonoBehaviour
 {
     [SerializeField] private Transform player;
-    [SerializeField] private TextMeshProUGUI scoreText;
     private int highScore = 0;
     public int currScore = 0;
     private float initialPos, currentPos;
@@ -30,19 +29,9 @@ public class ScoreKeeper : MonoBehaviour
     {
         currentPos = player.transform.position.x;
         currScore = Mathf.RoundToInt(currentPos - initialPos);
-        UpdateScores();
     }
 
-    void UpdateScores()
-    {
-        scoreText.text = "Score= " + currScore;
-    }
+    public bool newHighscore() { return currScore > highScore || !PlayerPrefs.HasKey("Highscore"); }
 
-    public void SaveScores()
-    {
-        if(currScore > highScore)
-        {
-            PlayerPrefs.SetInt("Highscore", currScore);
-        }
-    }
+    public int getScore() { return currScore; }
 }
