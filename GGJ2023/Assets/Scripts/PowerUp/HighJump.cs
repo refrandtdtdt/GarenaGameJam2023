@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class HighJump : PowerUp
 {
-    private int initialJumpDistance = 20;
+    private int initialJumpDistance = 14;
     private float duration = 5f; // Duration of the double jump effect in seconds
     private float remainingDuration;
     public void ApplyEffect(PlayerControl playerControl)
     {
         Debug.Log("Apply Effect");
-        playerControl.jumpDistance += 10;
+        playerControl.jumpDistance = 21;
         remainingDuration = duration;
 
         // Start a coroutine to track the duration

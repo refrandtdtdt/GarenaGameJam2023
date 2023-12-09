@@ -35,7 +35,7 @@ public class PlayerControl : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.BoxCast(raycastPos, playerCollider.bounds.size, 0.5f, Vector2.down, raycastDist, layerMask);
         Color rayColor;
-        if (hit.collider != null)
+        if (hit.collider != null && hit.normal.x == 0)
         {
             rayColor = Color.green;
         }
@@ -47,8 +47,8 @@ public class PlayerControl : MonoBehaviour
         Debug.DrawRay(raycastPos + new Vector2(playerCollider.bounds.extents.x, 0), Vector2.down * raycastDist, rayColor);
         Debug.DrawRay(raycastPos - new Vector2(playerCollider.bounds.extents.x, 0), Vector2.down * raycastDist, rayColor);
         Debug.DrawRay(raycastPos - new Vector2(playerCollider.bounds.extents.x, raycastDist), 2 * raycastDist * Vector2.right, rayColor);
-
-        return hit.collider != null;
+         
+        return hit.collider != null && hit.normal.x == 0;
     }
 
     private void Jump()

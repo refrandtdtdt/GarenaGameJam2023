@@ -5,7 +5,7 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class CoinMagnet : PowerUp
 {
-    public float magnetRadius = 5f;
+    public float magnetRadius = 7f;
     private float duration = 5f; // Duration of the double jump effect in seconds
     private float remainingDuration;
     private bool isActivated = false;

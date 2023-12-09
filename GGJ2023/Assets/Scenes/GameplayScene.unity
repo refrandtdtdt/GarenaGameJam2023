@@ -3270,6 +3270,10 @@ MonoBehaviour:
   - {fileID: 4582448987361618048, guid: 51103835cf11aa54493440296b1e23b0, type: 3}
   - {fileID: 4582448987361618048, guid: b1d391659cc33b64e90a3bb766ad6b76, type: 3}
   - {fileID: 4582448987361618048, guid: c75a928a85cc07d44ae57a573d927921, type: 3}
+  - {fileID: 4582448987361618048, guid: 640d137ec409ad64f80a9128dcdb3088, type: 3}
+  - {fileID: 4582448987361618048, guid: bf39b35e0522fd6468dd244711a6311a, type: 3}
+  - {fileID: 4582448987361618048, guid: a783962be62944940bad2098e18fd646, type: 3}
+  - {fileID: 4582448987361618048, guid: 7fe6e0a2d3cee6143a12afbe2e50a858, type: 3}
   gridX: 16
   gridY: 16
   playerDetectionDistance: 4
