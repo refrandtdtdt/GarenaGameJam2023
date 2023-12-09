@@ -8,14 +8,20 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     private BoxCollider2D playerCollider;
     public int jumpCount = 1;
+    public int maxJumpCount = 1;
     private bool isJumping = false;
     private bool isCrouching = false;
     [SerializeField ]private int defaultGravityScale = 2;
     [SerializeField] private int jumpDistance = 20;
     [SerializeField] private LayerMask layerMask;
+    PowerUp powerUp = new DoubleJump();
+
+    private float timer = 0f;
+    private float logInterval = 1f; // Log interval in seconds
 
     void Start()
     {
+        powerUp = new DoubleJump();
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<BoxCollider2D>();
     }
@@ -47,10 +53,15 @@ public class PlayerControl : MonoBehaviour
 
     private void Jump()
     {
-        if (!isJumping && isGrounded() && (jumpCount > 0))
+        if ((!isJumping && isGrounded()))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpDistance);
             isJumping = true;
+            jumpCount--;
+        }
+        if (isJumping && (jumpCount > 0))
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpDistance);
             jumpCount--;
         }
     }
@@ -79,6 +90,15 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
+        //print maxJumpCount every seconds
+        timer += Time.deltaTime;
+
+        if (timer >= logInterval)
+        {
+            Debug.Log("maxJumpCount: " + maxJumpCount);
+            timer = 0f; // Reset the timer
+        }
+
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             Jump();
@@ -94,7 +114,11 @@ public class PlayerControl : MonoBehaviour
         else if (isGrounded())
         {
             isJumping = false;
-            jumpCount = 1;
+            jumpCount = maxJumpCount;
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            powerUp.ApplyEffect(this);
         }
     }
 }
