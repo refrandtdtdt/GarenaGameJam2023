@@ -28,7 +28,7 @@ public class ScoreKeeper : MonoBehaviour
     void Update()
     {
         currentPos = player.transform.position.x;
-        currScore = Mathf.RoundToInt(currentPos - initialPos);
+        currScore = Mathf.FloorToInt(currentPos - initialPos);
     }
 
     public bool newHighscore() { return currScore > highScore || !PlayerPrefs.HasKey("Highscore"); }

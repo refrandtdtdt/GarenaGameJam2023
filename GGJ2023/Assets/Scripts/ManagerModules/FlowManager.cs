@@ -45,6 +45,7 @@ public class FlowManager : MonoBehaviour
     public void gameOver()
     {
         player.StopPlayer();
+        player.GetComponent<Animator>().Play("Player Dead");
         gameUI.SetActive(false);
         saveRun();
         StartCoroutine(WaitPopup());

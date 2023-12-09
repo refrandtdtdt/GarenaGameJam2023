@@ -15,6 +15,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] public int jumpDistance = 20;
     [SerializeField] private LayerMask layerMask;
     public PowerUp powerUp = new HighJump();
+    private Animator animator;
 
     private float timer = 0f;
     private float logInterval = 1f/4f; // Log interval in seconds
@@ -24,6 +25,7 @@ public class PlayerControl : MonoBehaviour
         powerUp = new HighJump();
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -61,6 +63,8 @@ public class PlayerControl : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpDistance);
             isJumping = true;
             jumpCount--;
+            animator.SetBool("Jumping", true);
+            animator.Play("Player Jump");
         }
     }
 
@@ -94,7 +98,7 @@ public class PlayerControl : MonoBehaviour
 
         if (timer >= logInterval)
         {
-            Debug.Log("JumpCount: " + jumpCount);
+            //Debug.Log("JumpCount: " + jumpCount);
             timer = 0f; // Reset the timer
         }
 
@@ -113,10 +117,10 @@ public class PlayerControl : MonoBehaviour
         {
             StopCrouch();
         }
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            powerUp.ApplyEffect(this);
-        }
+        //if (Input.GetKeyDown(KeyCode.U))
+        //{
+        //    powerUp.ApplyEffect(this);
+        //}
         
     }
 
@@ -126,6 +130,7 @@ public class PlayerControl : MonoBehaviour
         {
             jumpCount = maxJumpCount;
             isJumping = false;
+            animator.SetBool("Jumping", false);
         }
         else
         {
