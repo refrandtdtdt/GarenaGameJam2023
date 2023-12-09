@@ -52,11 +52,6 @@ public class PlayerControl : MonoBehaviour
             isJumping = true;
             jumpCount--;
         }
-        else if (isGrounded())
-        {
-            isJumping = false;
-            jumpCount = 1;
-        }
     }
 
     private void Crouch()
