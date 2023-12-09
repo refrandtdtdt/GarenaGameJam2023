@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoubleJump : PowerUp
+public class HighJump : PowerUp
 {
-    private int initialJumpCount = 1;
+    private int initialJumpDistance = 20;
     private float duration = 5f; // Duration of the double jump effect in seconds
     private float remainingDuration;
     public void ApplyEffect(PlayerControl playerControl)
     {
         Debug.Log("Apply Effect");
-        playerControl.maxJumpCount = 2;
+        playerControl.jumpDistance += 10;
         remainingDuration = duration;
 
         // Start a coroutine to track the duration
@@ -29,7 +29,7 @@ public class DoubleJump : PowerUp
         // Effect duration is over, reset the player's jump count
         if (playerControl != null)
         {
-            playerControl.maxJumpCount = initialJumpCount;
+            playerControl.jumpDistance = initialJumpDistance;
         }
 
     }
