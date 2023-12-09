@@ -12,9 +12,13 @@ public class ItemGenerator : MonoBehaviour
         if (rng > 0.35f && rng < 0.5f)
         {
             Vector2 prefabPosition = new Vector2(transform.position.x, transform.position.y - 4);
-            GameObject instantiatedItem = Instantiate(items[Random.Range(0,items.Length)], prefabPosition, Quaternion.identity);
+            if (items.Length > 0 ) 
+            {
+                GameObject instantiatedItem = Instantiate(items[Random.Range(0, items.Length)], prefabPosition, Quaternion.identity);
+                instantiatedItem.transform.parent = transform;
+            }
 
-            instantiatedItem.transform.parent = transform;
+            
         }
     }
 }

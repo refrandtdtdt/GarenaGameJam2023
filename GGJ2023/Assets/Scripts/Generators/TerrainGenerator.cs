@@ -9,7 +9,7 @@ public class TerrainGenerator : MonoBehaviour
     public int gridX = 16;
     public int gridY = 16;
     public float playerDetectionDistance = 4f;
-    public int[] initialTerrains = { 0, 0, 0, 0, 1, 0, 3, 2 };
+    public int[] initialTerrains = { 0, 0, 2, 3, 1, 0, 3, 2 };
 
     public Transform player; // Reference to the player's transform
 
@@ -40,7 +40,7 @@ public class TerrainGenerator : MonoBehaviour
 
     void GenerateInitialTerrain()
     {
-        for (int x = 0; x < 8; x++)
+        for (int x = 0; x < initialTerrains.Length; x++)
         {
             int index = initialTerrains[x];
             GameObject terrainPrefab = terrainPrefabs[index];
