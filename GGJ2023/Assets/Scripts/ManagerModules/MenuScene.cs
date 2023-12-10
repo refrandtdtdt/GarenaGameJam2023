@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuScene : MonoBehaviour
 {
-    [SerializeField] GameObject mainMenu, shopMenu, settingsMenu, howtoplayMenu, gachaPopUp;
+    [SerializeField] GameObject mainMenu, shopMenu, settingsMenu, howtoplayMenu, gachaMenu;
     [SerializeField] Slider volumeSlider;
     AudioSource audioSource;
 
@@ -30,6 +30,12 @@ public class MenuScene : MonoBehaviour
     {
         shopMenu.SetActive(false);
         mainMenu.SetActive(true);
+    }
+
+    public void gacha()
+    {
+        shopMenu.SetActive(false);
+        gachaMenu.SetActive(true);
     }
 
     public void settings()
