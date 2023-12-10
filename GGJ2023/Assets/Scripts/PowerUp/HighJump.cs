@@ -33,4 +33,8 @@ public class HighJump : PowerUp
         }
 
     }
+    public void setDuration(float duration)
+    {
+        this.duration = duration;
+    }
 }

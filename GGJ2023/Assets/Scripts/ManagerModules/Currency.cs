@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Currency : MonoBehaviour
 {
-    private int coins = 0;
+    [SerializeField]private int coins = 0;
     private int runCoins = 0;
     private int multiplier = 1;
 
@@ -17,6 +17,11 @@ public class Currency : MonoBehaviour
             coins = PlayerPrefs.GetInt("Coins");
         }
         runCoins = 0;
+    }
+
+    public void updateCoins()
+    {
+        coins = PlayerPrefs.GetInt("Coins");
     }
 
     public int getCoins()

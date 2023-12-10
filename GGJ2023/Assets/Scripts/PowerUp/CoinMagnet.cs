@@ -71,4 +71,9 @@ public class CoinMagnet : PowerUp
             yield return null; // Wait for the next frame
         }
     }
+
+    public void setDuration(float duration)
+    {
+        this.duration = duration;
+    }
 }

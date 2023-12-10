@@ -8,6 +8,7 @@ public class ChestController : MonoBehaviour, IPointerClickHandler
 {
     public Animator animator;
     private bool isOpened = false;
+    public GachaResultPopUp result;
 
     public delegate void ChestOpenedAction();
     public static event ChestOpenedAction OnChestOpened;
@@ -30,7 +31,14 @@ public class ChestController : MonoBehaviour, IPointerClickHandler
             // Set the flag to true to prevent further opening
             isOpened = true;
 
-            OnChestOpened?.Invoke();
+            result.ShowGachaResultPopUp();
         }
+    }
+
+    public void resetChest()
+    {
+        isOpened = false;
+        animator.SetBool("isOpened", false);
+        animator.Play("Chest Closed");
     }
 }

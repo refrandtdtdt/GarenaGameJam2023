@@ -9,7 +9,9 @@ public class DoubleCoinItem : MonoBehaviour
     {
         if (collision.TryGetComponent(out PlayerControl player))
         {
-            new DoubleCoins().ApplyEffect(player);
+            DoubleCoins powerup = new DoubleCoins();
+            powerup.setDuration(PlayerPrefs.GetFloat("doublecoin duration"));
+            powerup.ApplyEffect(player);
             Destroy(gameObject);
         }
     }

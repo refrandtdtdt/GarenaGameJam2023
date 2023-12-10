@@ -8,7 +8,9 @@ public class CoinMagnetItem : MonoBehaviour
     {
         if (collision.TryGetComponent(out PlayerControl player))
         {
-            new CoinMagnet().ApplyEffect(player);
+            CoinMagnet powerup = new CoinMagnet();
+            powerup.setDuration(PlayerPrefs.GetFloat("magnet duration"));
+            powerup.ApplyEffect(player);
             Destroy(gameObject);
         }
     }

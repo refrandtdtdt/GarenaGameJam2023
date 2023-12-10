@@ -8,8 +8,9 @@ public class FlowManager : MonoBehaviour
 {
     ScoreKeeper scoreKeeper;
     Currency currency;
-    [SerializeField] GameObject newHighscoreText, gameOverPopup, gameUI;
+    [SerializeField] GameObject newHighscoreText, gameOverPopup, gameUI, pauseMenu;
     [SerializeField] PlayerMove player;
+    bool pause = false;
 
     private void Awake()
     {
@@ -54,5 +55,31 @@ public class FlowManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         gameOverPopup.SetActive(true);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Pause();
+        }
+    }
+
+    public void Pause()
+    {
+        if (!pause)
+        {
+            player.StopPlayer();
+            Time.timeScale = 0;
+            pause = true;
+            pauseMenu.SetActive(true);
+        }
+        else
+        {
+            player.ContinuePlayer();
+            Time.timeScale = 1;
+            pause = false;
+            pauseMenu.SetActive(false);
+        }
     }
 }

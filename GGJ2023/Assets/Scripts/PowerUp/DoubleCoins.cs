@@ -32,4 +32,8 @@ public class DoubleCoins : PowerUp
         currency.Multiplier = 1;
         isActivated = false;
     }
+    public void setDuration(float duration)
+    {
+        this.duration = duration;
+    }
 }

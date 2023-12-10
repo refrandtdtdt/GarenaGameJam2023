@@ -7,6 +7,7 @@ public class GachaItem_001 : AbstractGachaItem
 {
     protected override void Apply()
     {
+
         // kasih efek dari item yang didapat dari gacha ini tuh apa
         throw new System.NotImplementedException();
     }

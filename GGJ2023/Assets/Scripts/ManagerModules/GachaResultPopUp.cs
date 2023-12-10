@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GachaResultPopUp : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public GameObject popUpPrefab;
+    public GameObject popUp;
+    public TextMeshProUGUI popUpText;
+    public Currency currency;
+    public MenuScene menuscene;
 
     void Start()
     {
@@ -13,22 +16,34 @@ public class GachaResultPopUp : MonoBehaviour
         ChestController.OnChestOpened += ShowGachaResultPopUp;
     }
 
-    void ShowGachaResultPopUp()
+    public void ShowGachaResultPopUp()
     {
-        // Wait for 3 seconds before showing the pop-up
+        // Wait for 1 second before showing the pop-up
         StartCoroutine(ShowPopUpAfterDelay(1f));
     }
 
     IEnumerator ShowPopUpAfterDelay(float delay)
     {
+        string item = SavedItems.randomAdd();
         yield return new WaitForSeconds(delay);
+        popUpText.text = item;
+        if(item == "100 coins")
+        {
+            currency.increaseCoins(100);
+        }
+        if (item == "1000 coins")
+        {
+            currency.increaseCoins(1000);
+        }
+        menuscene.updateCoinText();
+        popUp.SetActive(true);
 
-        Canvas canvas = FindObjectOfType<Canvas>();
+        //Canvas canvas = FindObjectOfType<Canvas>();
         // Instantiate the pop-up prefab
-        GameObject popUp = Instantiate(popUpPrefab, canvas.transform);
+        //GameObject popUp = Instantiate(popUpPrefab, canvas.transform);
 
         // Set the pop-up as a child of the canvas
-        popUp.transform.localPosition = Vector3.zero;
-        popUp.transform.localRotation = Quaternion.identity;
+        //popUp.transform.localPosition = Vector3.zero;
+        //popUp.transform.localRotation = Quaternion.identity;
     }
 }

@@ -8,7 +8,9 @@ public class HighJumpItem : MonoBehaviour
     {
         if (collision.TryGetComponent(out PlayerControl player))
         {
-            new HighJump().ApplyEffect(player);
+            HighJump powerup = new HighJump();
+            powerup.setDuration(PlayerPrefs.GetFloat("highjump duration"));
+            powerup.ApplyEffect(player);
             Destroy(gameObject);
         }
     }

@@ -38,4 +38,9 @@ public class PlayerMove : MonoBehaviour
     {
         dead = true;
     }
+
+    public void ContinuePlayer()
+    {
+        dead = false;
+    }
 }
